@@ -1,0 +1,1025 @@
+<title>Nando's Bread Book</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+  :root{
+    --paper:#E8E4D8;
+    --paper-2:#F2EFE6;
+    --ink:#171A2B;
+    --ink-soft:#4B4F63;
+    --ink-faint:#83869A;
+    --rule:#C9C3B2;
+    --rule-soft:#DAD5C7;
+    --stencil:#2F4B8F;
+    --rye:#8A5A3B;
+    --data:#4A6BB8;
+    --live:#C0762B;
+    --shadow:rgba(23,26,43,.10);
+    --f1:#E3BE8C; --f2:#CE9A5C; --f3:#B47734; --f4:#8E5620; --f5:#653A14;
+    --water:#4A6BB8; --salt:#B9B3A3;
+    --serif:"Newsreader",Georgia,"Times New Roman",serif;
+    --display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#131520;
+      --paper-2:#1B1E2A;
+      --ink:#E6E2D7;
+      --ink-soft:#AFB1BF;
+      --ink-faint:#7A7D8D;
+      --rule:#333749;
+      --rule-soft:#262A39;
+      --stencil:#8FA9EC;
+      --rye:#C08A63;
+      --data:#7E9BE4;
+      --live:#DA9350;
+      --shadow:rgba(0,0,0,.45);
+      --f1:#F0D3A6; --f2:#DCB075; --f3:#C48B48; --f4:#A2682F; --f5:#7C4C1F;
+      --water:#7E9BE4; --salt:#5B5F71;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#131520;
+    --paper-2:#1B1E2A;
+    --ink:#E6E2D7;
+    --ink-soft:#AFB1BF;
+    --ink-faint:#7A7D8D;
+    --rule:#333749;
+    --rule-soft:#262A39;
+    --stencil:#8FA9EC;
+    --rye:#C08A63;
+    --data:#7E9BE4;
+    --live:#DA9350;
+    --shadow:rgba(0,0,0,.45);
+      --f1:#F0D3A6; --f2:#DCB075; --f3:#C48B48; --f4:#A2682F; --f5:#7C4C1F;
+      --water:#7E9BE4; --salt:#5B5F71;
+  }
+
+  *{box-sizing:border-box}
+  body{background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:17px;line-height:1.6;margin:0;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 28px}
+  .col{max-width:64ch}
+  h1,h2,h3{font-family:var(--display);font-weight:800;text-wrap:balance;margin:0;letter-spacing:-.022em;line-height:1.06}
+  h1{font-size:clamp(36px,6.2vw,64px)}
+  h2{font-size:clamp(24px,3.2vw,32px)}
+  p{margin:0}
+  code{font-family:var(--mono);font-size:.92em;background:var(--rule-soft);padding:1px 5px;border-radius:2px}
+  .eyebrow{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--stencil)}
+  .rule{height:1px;background:var(--rule);border:0;margin:0}
+  .lede{color:var(--ink-soft);margin-top:14px}
+  section{padding:50px 0}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+  .num{font-variant-numeric:tabular-nums;font-family:var(--mono)}
+
+  header.mast{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:22px 0 20px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .brand svg{display:block;flex:none}
+  .brand .name{font-family:var(--display);font-weight:800;font-size:17px;letter-spacing:-.01em;line-height:1.1}
+  .brand .sub{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint)}
+  .lang{display:flex;border:1px solid var(--rule);border-radius:2px;overflow:hidden;background:var(--paper-2)}
+  .lang button{font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.1em;padding:7px 13px;border:0;background:transparent;color:var(--ink-soft);cursor:pointer}
+  .lang button[aria-pressed="true"]{background:var(--stencil);color:var(--paper-2)}
+  .lang button:focus-visible{outline:2px solid var(--live);outline-offset:-2px}
+
+  .hero{padding:40px 0 34px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:36px;align-items:center}
+  .hero .deck{font-size:19px;color:var(--ink-soft);margin-top:16px;max-width:52ch}
+  @media (max-width:780px){.hero{grid-template-columns:1fr;gap:22px}.boule{width:132px;height:132px}}
+
+  .facts{display:flex;flex-wrap:wrap;margin:30px 0 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+  .fact{padding:13px 22px 13px 0;margin-right:22px;border-right:1px solid var(--rule)}
+  .fact:last-child{border-right:0;margin-right:0}
+  .fact b{display:block;font-family:var(--mono);font-size:22px;font-weight:500;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+  .fact span{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint)}
+
+  .note{border-left:3px solid var(--rye);padding:2px 0 2px 18px;margin-top:20px}
+  .note .k{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--rye);font-weight:600}
+
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px}
+  .chip{font-family:var(--mono);font-size:12px;font-weight:500;padding:8px 12px;border-radius:2px;cursor:pointer;border:1px solid var(--rule);background:transparent;color:var(--ink-soft)}
+  .chip:hover{border-color:var(--data);color:var(--ink)}
+  .chip[aria-pressed="true"]{border-color:var(--stencil);color:var(--paper-2);background:var(--stencil)}
+  .chip:focus-visible{outline:2px solid var(--live);outline-offset:2px}
+  .chip .dot{color:var(--rye)}
+  .chip[aria-pressed="true"] .dot{color:var(--paper-2)}
+
+  .panel{background:var(--paper-2);border:1px solid var(--rule);box-shadow:0 1px 0 var(--shadow)}
+  .ticket{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.92fr) minmax(0,1.05fr)}
+  @media (max-width:1000px){.ticket{grid-template-columns:1fr 1fr}}
+  @media (max-width:700px){.ticket{grid-template-columns:1fr}}
+  .ticket>div{padding:24px 26px}
+  .ticket .left,.ticket .mid{border-right:1px solid var(--rule)}
+  @media (max-width:1000px){.ticket .mid{border-right:0}}
+  @media (max-width:700px){.ticket .left,.ticket .mid{border-right:0}}
+  .ticket .left,.ticket .mid{border-bottom:0}
+  @media (max-width:1000px){.ticket .left{border-bottom:1px solid var(--rule)}}
+  @media (max-width:700px){.ticket .mid{border-bottom:1px solid var(--rule)}}
+
+  .t-name{font-family:var(--display);font-weight:800;font-size:21px;letter-spacing:-.02em}
+  .t-desc{font-size:15px;color:var(--ink-soft);margin-top:6px}
+
+  .modes{display:flex;border:1px solid var(--rule);border-radius:2px;overflow:hidden;margin-top:18px}
+  .modes button{flex:1;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.04em;padding:8px 6px;border:0;border-right:1px solid var(--rule);background:transparent;color:var(--ink-soft);cursor:pointer}
+  .modes button:last-child{border-right:0}
+  .modes button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+  .modes button:focus-visible{outline:2px solid var(--live);outline-offset:-2px}
+  .sliders{display:flex;flex-direction:column;gap:15px;margin:16px 0 4px}
+  .range{font-family:var(--mono);font-size:13px;color:var(--ink-soft);margin-top:4px;font-variant-numeric:tabular-nums}
+  .range b{color:var(--ink);font-weight:500}
+  .sl-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-faint)}
+  .sl-head b{font-size:14px;letter-spacing:0;text-transform:none;color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums}
+  .sl-head b.off{color:var(--live)}
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:18px;background:transparent;cursor:pointer;margin:0;display:block}
+  input[type=range]::-webkit-slider-runnable-track{height:2px;background:var(--rule)}
+  input[type=range]::-moz-range-track{height:2px;background:var(--rule)}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--stencil);border:2px solid var(--paper-2);margin-top:-6px}
+  input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;background:var(--stencil);border:2px solid var(--paper-2)}
+  input[type=range]:focus-visible{outline:2px solid var(--live);outline-offset:3px}
+  .reset{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;background:none;border:0;border-bottom:1px solid var(--rule);color:var(--ink-faint);cursor:pointer;padding:2px 0;margin-top:2px;align-self:flex-start}
+  .reset:hover{color:var(--live);border-color:var(--live)}
+
+  table.weigh{width:100%;border-collapse:collapse;font-family:var(--mono);font-variant-numeric:tabular-nums}
+  table.weigh th{text-align:right;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);padding:0 0 7px;border-bottom:1px solid var(--rule)}
+  table.weigh th:first-child{text-align:left}
+  table.weigh td{padding:6px 0;font-size:14px;text-align:right;border-bottom:1px dotted var(--rule)}
+  table.weigh td:first-child{text-align:left;font-family:var(--serif);font-size:15.5px}
+  table.weigh tr.zero{display:none}
+  table.weigh tr.sum td{border-bottom:0;padding-top:12px;font-weight:600;font-size:15.5px}
+  .pc{color:var(--ink-faint);font-size:12.5px}
+
+  .readout{display:flex;gap:22px;flex-wrap:wrap}
+  .readout div{min-width:78px}
+  .readout b{display:block;font-family:var(--mono);font-size:20px;font-weight:500;font-variant-numeric:tabular-nums;color:var(--stencil)}
+  .readout span{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-faint)}
+  svg.donut{display:block;width:100%;max-width:300px;height:auto;margin:0 auto}
+  svg.donut text.ctr{font-family:var(--mono);fill:var(--ink);font-variant-numeric:tabular-nums}
+  svg.donut text.ctrsub{font-family:var(--mono);fill:var(--ink-faint);font-size:8px;letter-spacing:.11em}
+  svg.donut text.brk{font-family:var(--mono);fill:var(--ink-soft);font-size:7.5px;letter-spacing:.06em}
+  .legend{display:grid;grid-template-columns:1fr auto auto;gap:3px 10px;font-family:var(--mono);font-size:11.5px;color:var(--ink-soft);margin-top:14px;font-variant-numeric:tabular-nums}
+  .legend i{display:inline-block;width:9px;height:9px;margin-right:7px;border-radius:1px;vertical-align:-1px}
+  .legend b{font-weight:500;color:var(--ink)}
+  .legend .sub{grid-column:1/-1;color:var(--ink-faint);font-size:10.5px;padding:1px 0 3px 16px}
+  .sched{display:flex;gap:14px;font-family:var(--mono);font-size:10.5px;color:var(--ink-faint);margin-top:12px;flex-wrap:wrap}
+  .sched i{display:inline-block;width:9px;height:9px;margin-right:6px;border-radius:1px;vertical-align:-1px}
+  .est{margin-top:20px;padding-top:16px;border-top:1px solid var(--rule)}
+  .est .big{font-family:var(--mono);font-size:27px;font-weight:500;font-variant-numeric:tabular-nums;color:var(--live);letter-spacing:-.02em}
+  .est .cap{font-family:var(--mono);font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-faint)}
+  .est p{font-size:14px;color:var(--ink-soft);margin-top:8px}
+
+  figure{margin:0}
+  .chartbox{background:var(--paper-2);border:1px solid var(--rule);padding:20px 22px 14px;overflow-x:auto}
+  svg.chart{display:block;width:100%;height:auto;min-width:520px}
+  .chart text{font-family:var(--mono);font-size:10px;fill:var(--ink-faint);letter-spacing:.04em}
+  .chart text.axtitle{font-size:10px;letter-spacing:.12em;text-transform:uppercase;fill:var(--ink-faint)}
+  .chart .grid{stroke:var(--rule-soft);stroke-width:1}
+  .chart .axis{stroke:var(--rule);stroke-width:1}
+  figcaption{font-size:14px;color:var(--ink-soft);margin-top:14px;max-width:70ch}
+  .keys{display:flex;flex-wrap:wrap;gap:18px;font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin-top:12px}
+  .keys span{display:flex;align-items:center;gap:7px}
+  .tip{pointer-events:none}
+  .tip rect{fill:var(--ink);opacity:.94}
+  .tip text{fill:var(--paper);font-size:10.5px}
+
+  table.data{width:100%;border-collapse:collapse;font-family:var(--mono);font-variant-numeric:tabular-nums;margin-top:26px;font-size:13px}
+  table.data th{text-align:right;font-size:9.5px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-faint);padding:0 10px 8px 0;border-bottom:1px solid var(--rule);white-space:nowrap}
+  table.data th:first-child,table.data td:first-child{text-align:left;padding-left:0}
+  table.data td{padding:7px 10px 7px 0;text-align:right;border-bottom:1px solid var(--rule-soft);white-space:nowrap}
+  table.data td:first-child{font-family:var(--serif);font-size:15px}
+  table.data tr.fitrow td{color:var(--ink)}
+  table.data tr:not(.fitrow) td{color:var(--ink-faint)}
+  table.data td .mk{color:var(--data);font-size:11px}
+  .scrollx{overflow-x:auto}
+
+  ol.method{list-style:none;padding:0;margin:0;counter-reset:m}
+  ol.method li{counter-increment:m;display:grid;grid-template-columns:40px 1fr 104px;gap:16px;padding:13px 0;border-bottom:1px solid var(--rule);align-items:baseline}
+  @media (max-width:640px){ol.method li{grid-template-columns:30px 1fr}ol.method li .clock{grid-column:2}}
+  ol.method li::before{content:counter(m,decimal-leading-zero);font-family:var(--mono);font-size:12px;font-weight:600;color:var(--stencil)}
+  ol.method .clock{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);text-align:right}
+  @media (max-width:640px){ol.method .clock{text-align:left}}
+
+  details.guide{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+  details.guide summary{cursor:pointer;list-style:none;padding:17px 0;display:flex;align-items:center;justify-content:space-between;gap:16px;font-family:var(--display);font-weight:600;font-size:18px;letter-spacing:-.01em}
+  details.guide summary::-webkit-details-marker{display:none}
+  details.guide summary .more{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--stencil);font-weight:600;flex:none}
+  details.guide[open] summary .more span.shut{display:none}
+  details.guide:not([open]) summary .more span.open{display:none}
+  details.guide summary:focus-visible{outline:2px solid var(--live);outline-offset:2px}
+  .days{display:grid;grid-template-columns:repeat(auto-fill,minmax(136px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin:6px 0 22px}
+  .day{background:var(--paper);padding:10px 12px}
+  .day b{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--stencil);margin-bottom:3px}
+  .day span{font-size:13.5px;color:var(--ink-soft);line-height:1.4;display:block}
+  .day.mark b{color:var(--live)}
+
+  footer{padding:38px 0 56px;color:var(--ink-faint);font-size:14px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;border-top:1px solid var(--rule)}
+  footer .mono{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="wrap">
+
+  <header class="mast">
+    <div class="brand">
+      <svg width="38" height="38" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="18.5" fill="none" stroke="var(--ink)" stroke-width="1.4"></circle>
+        <circle cx="20" cy="20" r="13" fill="var(--live)" opacity=".16"></circle>
+        <g stroke="var(--ink)" stroke-width="1.9" stroke-linecap="round">
+          <line x1="12.5" y1="24.5" x2="19" y2="14.5"></line>
+          <line x1="17.5" y1="26.5" x2="24" y2="16.5"></line>
+          <line x1="22.5" y1="28" x2="28" y2="19.5"></line>
+        </g>
+      </svg>
+      <div>
+        <div class="name" data-en="Nando's Bread Book" data-de="Nandos Brotbuch">Nando's Bread Book</div>
+        <div class="sub">Zürich &middot; n = 6</div>
+      </div>
+    </div>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang="de" aria-pressed="false">DE</button>
+    </div>
+  </header>
+  <hr class="rule">
+
+  <div class="hero">
+    <div>
+      <p class="eyebrow" data-en="Five formulas, one starter" data-de="Fünf Formeln, ein Sauerteig">Five formulas, one starter</p>
+      <h1 data-en="Sourdough, as a dataset." data-de="Sauerteig als Datensatz.">Sourdough, as a dataset.</h1>
+      <p class="deck" data-en="Five doughs I bake regularly, in baker's percentages — everything measured against total flour, with the starter's flour and water counted where they belong. Set the sliders, read the weights off the scale." data-de="Fünf Teige, die ich regelmässig backe, in Bäckerprozenten — alles gerechnet auf das Gesamtmehl, mit dem Mehl und Wasser aus dem Sauerteig korrekt zugeordnet. Regler einstellen, Gewichte ablesen.">Five doughs I bake regularly, in baker's percentages — everything measured against total flour, with the starter's flour and water counted where they belong. Set the sliders, read the weights off the scale.</p>
+    </div>
+    <svg class="boule" width="172" height="172" viewBox="0 0 100 100" aria-hidden="true">
+      <defs><radialGradient id="crustg" cx="42%" cy="36%" r="72%">
+        <stop offset="0%" stop-color="var(--live)" stop-opacity=".40"></stop>
+        <stop offset="100%" stop-color="var(--rye)" stop-opacity=".14"></stop>
+      </radialGradient></defs>
+      <circle cx="50" cy="50" r="44" fill="url(#crustg)"></circle>
+      <circle cx="50" cy="50" r="44" fill="none" stroke="var(--ink)" stroke-width="1.1"></circle>
+      <circle cx="50" cy="50" r="35" fill="none" stroke="var(--ink)" stroke-width=".5" stroke-dasharray="1 4" opacity=".5"></circle>
+      <g stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round" opacity=".9">
+        <line x1="30" y1="62" x2="48" y2="34"></line>
+        <line x1="42" y1="68" x2="60" y2="40"></line>
+        <line x1="54" y1="73" x2="70" y2="48"></line>
+      </g>
+    </svg>
+  </div>
+
+  <div class="facts">
+    <div class="fact"><b>5</b><span data-en="Formulas" data-de="Formeln">Formulas</span></div>
+    <div class="fact"><b>60–91%</b><span data-en="Hydration range" data-de="Hydration">Hydration range</span></div>
+    <div class="fact"><b>8.3–22.2%</b><span data-en="Inoculation range" data-de="Anstellgut">Inoculation range</span></div>
+    <div class="fact"><b>−1.37</b><span data-en="Fitted exponent" data-de="Exponent (Fit)">Fitted exponent</span></div>
+  </div>
+
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow" data-en="Calculator" data-de="Rechner">Calculator</p>
+      <h2 data-en="Weigh it out" data-de="Abwiegen">Weigh it out</h2>
+    </div>
+    <p class="lede col" style="margin-bottom:22px" data-en="Pick a base formula, then move any slider off it. Dough weight scales everything; hydration moves water against flour; inoculation moves starter and drives the proof-time estimate below." data-de="Grundformel wählen, dann beliebige Regler davon wegbewegen. Das Teiggewicht skaliert alles, die Hydration verschiebt Wasser gegen Mehl, das Anstellgut verschiebt den Sauerteig und steuert die Gehzeit-Schätzung unten.">Pick a base formula, then move any slider off it. Dough weight scales everything; hydration moves water against flour; inoculation moves starter and drives the proof-time estimate below.</p>
+
+    <div class="chips" id="chips" role="group" aria-label="Formula"></div>
+
+    <div class="panel ticket">
+      <div class="left">
+        <div class="t-name" id="t-name">—</div>
+        <p class="t-desc" id="t-desc">—</p>
+        <div class="modes" role="group" aria-label="Direction">
+          <button type="button" data-mode="fwd" aria-pressed="true" data-en="Starter → time" data-de="Anstellgut → Zeit">Starter → time</button>
+          <button type="button" data-mode="inv" aria-pressed="false" data-en="Time → starter" data-de="Zeit → Anstellgut">Time → starter</button>
+        </div>
+        <div class="sliders">
+          <div>
+            <div class="sl-head"><span data-en="Dough weight" data-de="Teiggewicht">Dough weight</span><b id="v-dough">—</b></div>
+            <input type="range" id="s-dough" min="300" max="4000" step="20" value="888" aria-label="Dough weight in grams">
+          </div>
+          <div>
+            <div class="sl-head"><span data-en="Hydration" data-de="Hydration">Hydration</span><b id="v-hyd">—</b></div>
+            <input type="range" id="s-hyd" min="55" max="95" step="0.5" value="60" aria-label="Hydration percent">
+          </div>
+          <div id="w-ino">
+            <div class="sl-head"><span data-en="Inoculation" data-de="Anstellgut">Inoculation</span><b id="v-ino">—</b></div>
+            <input type="range" id="s-ino" min="3" max="30" step="0.1" value="12.8" aria-label="Inoculation percent">
+          </div>
+          <div id="w-goal" hidden>
+            <div class="sl-head"><span data-en="Target time in the fridge" data-de="Zielzeit im Kühlschrank">Target time in the fridge</span><b id="v-goal">—</b></div>
+            <input type="range" id="s-goal" min="0" max="1000" step="1" value="640" aria-label="Target hours in the fridge">
+          </div>
+          <div>
+            <div class="sl-head"><span data-en="Warm phase at 21 °C" data-de="Warmphase bei 21 °C">Warm phase at 21 °C</span><b id="v-warm">—</b></div>
+            <input type="range" id="s-warm" min="0" max="8" step="0.5" value="3" aria-label="Hours at room temperature before the fridge">
+          </div>
+          <div>
+            <div class="sl-head"><span data-en="Fridge temperature" data-de="Kühlschranktemperatur">Fridge temperature</span><b id="v-temp">—</b></div>
+            <input type="range" id="s-temp" min="4" max="24" step="0.5" value="5" aria-label="Fridge temperature in celsius">
+          </div>
+          <button type="button" class="reset" id="reset" data-en="Reset to formula" data-de="Auf Formel zurücksetzen">Reset to formula</button>
+        </div>
+      </div>
+
+      <div class="mid">
+        <table class="weigh">
+          <thead><tr>
+            <th data-en="Ingredient" data-de="Zutat">Ingredient</th><th>g</th><th>%</th>
+          </tr></thead>
+          <tbody id="rows"></tbody>
+        </table>
+        <div class="est" id="pizza-box" hidden>
+          <div class="cap" data-en="Pizza balls at 280 g" data-de="Pizzakugeln à 280 g">Pizza balls at 280 g</div>
+          <div class="big" id="pizza-n">—</div>
+          <p id="pizza-note"></p>
+        </div>
+      </div>
+
+      <div>
+        <svg class="donut" id="donut" viewBox="0 0 300 300" role="img" aria-label="Final dough composition by weight"></svg>
+        <div class="legend" id="legend"></div>
+        <div class="sched" id="sched"></div>
+        <div class="est">
+          <div class="cap" id="est-cap">ESTIMATED TIME IN THE FRIDGE</div>
+          <div class="big" id="est-t">—</div>
+          <div class="range" id="est-range"></div>
+          <p id="est-note"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <div class="col">
+      <p class="eyebrow" data-en="Convention" data-de="Konvention">Convention</p>
+      <h2 data-en="Half the starter is flour." data-de="Der halbe Sauerteig ist Mehl.">Half the starter is flour.</h2>
+      <p class="lede" data-en="The starter runs at 100% hydration — equal weights flour and water — so every gram of it splits 50/50 into the flour and water totals. Percentages that ignore this are wrong by a few points, and by more than that at 20% inoculation." data-de="Der Sauerteig läuft auf 100% Hydration — gleich viel Mehl wie Wasser. Jedes Gramm teilt sich also 50/50 auf Mehl- und Wassersumme auf. Prozentangaben, die das ignorieren, liegen ein paar Punkte daneben — bei 20% Anstellgut deutlich mehr.">The starter runs at 100% hydration — equal weights flour and water — so every gram of it splits 50/50 into the flour and water totals. Percentages that ignore this are wrong by a few points, and by more than that at 20% inoculation.</p>
+      <p class="lede" data-en="Two ways to quote the starter, and both are on this page. <b>Inoculation</b> is starter weight over total flour — the number you set on the slider. <b>Prefermented flour (PFF)</b> is the share of the total flour that has already been fermented, which for a 100% hydration starter is exactly half the inoculation. PFF is the one that actually drives the rate, so it is what the model is really a function of; at a fixed starter hydration the two are interchangeable and inoculation is easier to weigh against. Switch to a stiff starter and that stops being true — 200 g of a 50% starter carries 133 g of flour, not 100 g, and the mapping breaks." data-de="Zwei Arten, den Sauerteig anzugeben, und beide stehen auf dieser Seite. <b>Anstellgut</b> ist Sauerteiggewicht durch Gesamtmehl — die Zahl am Regler. <b>Vorfermentiertes Mehl (PFF)</b> ist der Anteil des Gesamtmehls, der bereits vergoren ist, bei 100% Hydration genau die Hälfte des Anstellguts. PFF treibt die Rate, das Modell ist also eigentlich eine Funktion davon; bei fester Sauerteig-Hydration sind beide austauschbar und Anstellgut ist leichter abzuwiegen. Mit einem festen Sauerteig gilt das nicht mehr — 200 g eines 50%-Sauerteigs tragen 133 g Mehl, nicht 100 g, und die Zuordnung bricht.">Two ways to quote the starter, and both are on this page. <b>Inoculation</b> is starter weight over total flour — the number you set on the slider. <b>Prefermented flour (PFF)</b> is the share of the total flour that has already been fermented, which for a 100% hydration starter is exactly half the inoculation. PFF is the one that actually drives the rate, so it is what the model is really a function of; at a fixed starter hydration the two are interchangeable and inoculation is easier to weigh against. Switch to a stiff starter and that stops being true — 200 g of a 50% starter carries 133 g of flour, not 100 g, and the mapping breaks.</p>
+
+      <div class="note">
+        <p class="k" data-en="Flour type of the starter" data-de="Mehlsorte des Sauerteigs">Flour type of the starter</p>
+        <p data-en="Mine is a <b>spelt</b> starter; the rye loaf is fed from a separate <b>rye</b> starter. That determines which flour row the starter's contribution lands in, which is why the spelt formulas read 100% spelt rather than 92%." data-de="Meiner ist ein <b>Dinkel</b>-Sauerteig; das Roggenbrot wird aus einem separaten <b>Roggen</b>-Sauerteig geführt. Das bestimmt, in welche Mehlzeile der Sauerteig-Anteil fällt — deshalb stehen die Dinkelformeln bei 100% Dinkel statt bei 92%.">Mine is a <b>spelt</b> starter; the rye loaf is fed from a separate <b>rye</b> starter. That determines which flour row the starter's contribution lands in, which is why the spelt formulas read 100% spelt rather than 92%.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow" data-en="The model" data-de="Das Modell">The model</p>
+      <h2 data-en="Three hours warm ≈ thirteen hours cold" data-de="Drei Stunden warm ≈ dreizehn Stunden kalt">Three hours warm ≈ thirteen hours cold</h2>
+    </div>
+    <p class="lede col" style="margin-bottom:8px" data-en="Fermentation is a rate, so a dough needs a <em>dose</em>, not a duration — and the two phases of the schedule buy that dose at wildly different prices. At a Q₁₀ of 2.5, one hour at 21 °C does what 4.3 hours in the fridge do, so the 3-hour bulk on the counter is already worth about half a day of cold." data-de="Gärung ist eine Rate — ein Teig braucht also eine <em>Dosis</em>, keine Dauer. Und die beiden Phasen des Plans kaufen diese Dosis zu völlig verschiedenen Preisen: Bei Q₁₀ = 2,5 leistet eine Stunde bei 21 °C so viel wie 4,3 Stunden im Kühlschrank. Die drei Stunden Stockgare auf der Ablage sind damit schon rund einen halben Tag Kälte wert.">Fermentation is a rate, so a dough needs a <em>dose</em>, not a duration — and the two phases of the schedule buy that dose at wildly different prices. At a Q₁₀ of 2.5, one hour at 21 °C does what 4.3 hours in the fridge do, so the 3-hour bulk on the counter is already worth about half a day of cold.</p>
+    <p class="lede col" style="margin-bottom:24px" data-en="Charging the warm phase first and fitting what is left against the three spelt formulas gives <code>dose = 1378 · i⁻¹·³⁷</code> in fridge-hours, R² = 0.97. Somewhere between inverse-linear and inverse-square — and with three points, the exponent lands anywhere from −1.1 to −1.5 depending on what you assume for Q₁₀ and the length of the warm phase. Treat the shape as established and the exponent as provisional — and note the page refits all of this live, so moving the warm-phase slider genuinely re-runs the regression." data-de="Rechnet man die Warmphase zuerst an und passt den Rest an die drei Dinkelformeln an, ergibt sich <code>Dosis = 1378 · i⁻¹·³⁷</code> in Kühlstunden, R² = 0,97. Irgendwo zwischen invers-linear und invers-quadratisch — und bei drei Punkten landet der Exponent je nach Annahme für Q₁₀ und Länge der Warmphase zwischen −1,1 und −1,5. Die Form ist belastbar, der Exponent vorläufig — und die Seite rechnet den Fit live neu: Der Warmphasen-Regler startet die Regression tatsächlich neu.">Charging the warm phase first and fitting what is left against the three spelt formulas gives <code>dose = 1378 · i⁻¹·³⁷</code> in fridge-hours, R² = 0.97. Somewhere between inverse-linear and inverse-square — and with three points, the exponent lands anywhere from −1.1 to −1.5 depending on what you assume for Q₁₀ and the length of the warm phase. Treat the shape as established and the exponent as provisional — and note the page refits all of this live, so moving the warm-phase slider genuinely re-runs the regression.</p>
+
+    <p class="lede col" style="margin:0 0 24px" data-en="Which is why the chart carries a band rather than a line. Every bake here is an <em>interval</em> — &lsquo;6–24 h&rsquo; is a fourfold range on its own — so the same three points also support a line through the window lows and a line through the highs. Those two, swept across a defensible range of Q₁₀, are the shaded region: about ±50% at 8% inoculation, a factor of two at 13%, and by 22% it is an order of magnitude and the model is telling you it does not know. Read the line as the middle of a guess, and the band as the honest answer." data-de="Deshalb trägt das Diagramm ein Band statt einer Linie. Jeder Backvorgang hier ist ein <em>Intervall</em> — &sbquo;6–24 Std.&lsquo; ist für sich schon ein Faktor vier —, also stützen dieselben drei Punkte auch eine Linie durch die unteren und eine durch die oberen Fenstergrenzen. Diese beiden, über einen vertretbaren Q₁₀-Bereich geführt, ergeben die schattierte Fläche: rund ±50% bei 8% Anstellgut, Faktor zwei bei 13%, und bei 22% ist es eine Grössenordnung — da sagt das Modell schlicht, dass es es nicht weiss. Die Linie ist die Mitte einer Schätzung, das Band die ehrliche Antwort.">Which is why the chart carries a band rather than a line. Every bake here is an <em>interval</em> — &lsquo;6–24 h&rsquo; is a fourfold range on its own — so the same three points also support a line through the window lows and a line through the highs. Those two, swept across a defensible range of Q₁₀, are the shaded region: about ±50% at 8% inoculation, a factor of two at 13%, and by 22% it is an order of magnitude and the model is telling you it does not know. Read the line as the middle of a guess, and the band as the honest answer.</p>
+
+    <figure>
+      <div class="chartbox">
+        <svg class="chart" id="chart" viewBox="0 0 760 400" role="img" aria-label="Inoculation percent against proof time, log-log, with fitted curve"></svg>
+      </div>
+      <div class="keys" id="keys"></div>
+      <figcaption id="cap"></figcaption>
+    </figure>
+
+    <div class="scrollx">
+      <table class="data">
+        <thead><tr>
+          <th data-en="Formula" data-de="Formel">Formula</th>
+          <th data-en="Inoc." data-de="Anst.">Inoc.</th>
+          <th>PFF</th>
+          <th data-en="Salt" data-de="Salz">Salt</th>
+          <th data-en="Hydr." data-de="Hydr.">Hydr.</th>
+          <th data-en="Fridge" data-de="Kühlung">Fridge</th>
+          <th data-en="In fit" data-de="Im Fit">In fit</th>
+        </tr></thead>
+        <tbody id="datarows"></tbody>
+      </table>
+    </div>
+
+    <p class="lede col" data-en="Three caveats, in order of how much they should bother you. <b>Salt is not held constant</b> in the &lsquo;controlled&rsquo; series — it runs 3.14, 2.94, 2.86% of flour, falling as inoculation rises, and salt slows fermentation. It moves the same direction as the effect, so some of that exponent is salt, not starter. <b>Temperature is not in the data</b> — the Q₁₀ of 2.5 is textbook, not measured here. <b>The other four formulas all carry the same 6–24 h bracket</b> at inoculations from 5.2 to 22.2%, which makes them brackets I settled on rather than observations; fit all seven and R² collapses to 0.15. They are plotted hollow and excluded." data-de="Drei Vorbehalte, nach Gewicht geordnet. <b>Salz ist in der &sbquo;kontrollierten&lsquo; Reihe nicht konstant</b> — es liegt bei 3,14, 2,94 und 2,86% des Mehls und sinkt, während das Anstellgut steigt. Salz bremst die Gärung, wirkt also in dieselbe Richtung: ein Teil des Exponenten ist Salz, nicht Sauerteig. <b>Temperatur steckt nicht in den Daten</b> — Q₁₀ = 2,5 ist Lehrbuch, hier nicht gemessen. <b>Die anderen vier tragen alle dasselbe 6–24-Std.-Fenster</b> bei Anstellgut zwischen 5,2 und 22,2% — das sind Fenster, auf die ich mich festgelegt habe, keine Messungen. Über alle sieben fällt R² auf 0,15. Sie sind hohl eingezeichnet und ausgeschlossen.">Three caveats, in order of how much they should bother you. <b>Salt is not held constant</b> in the &lsquo;controlled&rsquo; series — it runs 3.14, 2.94, 2.86% of flour, falling as inoculation rises, and salt slows fermentation. It moves the same direction as the effect, so some of that exponent is salt, not starter. <b>Temperature is not in the data</b> — the Q₁₀ of 2.5 is textbook, not measured here. <b>The other four formulas all carry the same 6–24 h bracket</b> at inoculations from 5.2 to 22.2%, which makes them brackets I settled on rather than observations; fit all seven and R² collapses to 0.15. They are plotted hollow and excluded.</p>
+
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <div class="sec-head">
+      <p class="eyebrow" data-en="Identical for all five" data-de="Für alle fünf identisch">Identical for all five</p>
+      <h2 data-en="Method" data-de="Methode">Method</h2>
+    </div>
+    <ol class="method">
+      <li><span data-en="Feed the starter, hold it above 21 °C. Next to the coffee machine is a real answer." data-de="Sauerteig füttern, über 21 °C halten. Neben der Kaffeemaschine ist ein ernst gemeinter Tipp.">Feed the starter, hold it above 21 °C. Next to the coffee machine is a real answer.</span><span class="clock" data-en="6–12 h before" data-de="6–12 Std. vorher">6–12 h before</span></li>
+      <li><span data-en="Combine everything to the weights above. It will look wrong. It is not wrong." data-de="Alles nach den Gewichten oben zusammengeben. Es sieht falsch aus. Es ist nicht falsch.">Combine everything to the weights above. It will look wrong. It is not wrong.</span><span class="clock">+0:00</span></li>
+      <li><span data-en="Rest — autolyse, the flour takes up the water." data-de="Ruhen lassen — Autolyse, das Mehl nimmt das Wasser auf.">Rest — autolyse, the flour takes up the water.</span><span class="clock">15 min</span></li>
+      <li><span data-en="Mix again to full incorporation." data-de="Nochmals mischen, bis alles eingearbeitet ist.">Mix again to full incorporation.</span><span class="clock">2 min</span></li>
+      <li><span data-en="Bulk at room temperature. Stretch and fold every 30 min — optional, it buys structure in the wet formulas." data-de="Stockgare bei Raumtemperatur. Alle 30 Min. dehnen und falten — optional, bringt Struktur bei den nassen Formeln.">Bulk at room temperature. Stretch and fold every 30 min — optional, it buys structure in the wet formulas.</span><span class="clock">3 h</span></li>
+      <li><span data-en="Second rest at room temperature, or into the fridge for the window on the chart. The cold phase is where the acidity develops." data-de="Zweite Gare bei Raumtemperatur oder in den Kühlschrank für das Fenster aus dem Diagramm. In der Kälte entsteht die Säure.">Second rest at room temperature, or into the fridge for the window on the chart. The cold phase is where the acidity develops.</span><span class="clock" data-en="3–72 h" data-de="3–72 Std.">3–72 h</span></li>
+      <li><span data-en="Lid on, 275 °C. Trapped steam does the oven spring." data-de="Deckel drauf, 275 °C. Der eingeschlossene Dampf macht den Ofentrieb.">Lid on, 275 °C. Trapped steam does the oven spring.</span><span class="clock">20 min</span></li>
+      <li><span data-en="Lid off, 180–200 °C, bake to the colour you want. That last call is yours, not the model\u2019s." data-de="Deckel ab, 180–200 °C, bis zur gewünschten Farbe backen. Diese letzte Entscheidung gehört dir, nicht dem Modell.">Lid off, 180–200 °C, bake to the colour you want. That last call is yours, not the model’s.</span><span class="clock">15–20 min</span></li>
+    </ol>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <details class="guide">
+      <summary>
+        <span data-en="Building a starter from scratch — 12 days" data-de="Sauerteig von null aufbauen — 12 Tage">Building a starter from scratch — 12 days</span>
+        <span class="more"><span class="shut" data-en="Open" data-de="Öffnen">Open</span><span class="open" data-en="Close" data-de="Schliessen">Close</span></span>
+      </summary>
+      <p class="lede col" style="margin:4px 0 20px" data-en="One jar, one feed a day, 21 °C minimum and faster near 30 °C. The stop condition is behavioural, not the calendar: keep going until it rises and falls predictably between feeds." data-de="Ein Glas, eine Fütterung pro Tag, mindestens 21 °C, schneller nahe 30 °C. Das Abbruchkriterium ist das Verhalten, nicht der Kalender: weitermachen, bis er zwischen den Fütterungen vorhersagbar aufgeht und wieder fällt.">One jar, one feed a day, 21 °C minimum and faster near 30 °C. The stop condition is behavioural, not the calendar: keep going until it rises and falls predictably between feeds.</p>
+      <div class="days" id="days"></div>
+    </details>
+  </section>
+
+  <footer>
+    <span data-en="Baked in Zürich. Send me a photo of the crumb — and of your residuals." data-de="Gebacken in Zürich. Schick mir ein Foto der Krume — und deiner Residuen.">Baked in Zürich. Send me a photo of the crumb — and of your residuals.</span>
+    <span class="mono">Nando Metzger</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  // ---- recipes (what you can build) ---------------------------------------
+  var R = [
+    { id:"sp", st:"spelt", pizza:true, en:"Spelt pizza / bread", de:"Dinkel-Pizza / -Brot",
+      dEn:"One dough, three schedules — the 48–72 h, 24–48 h and 6–24 h versions differ only in how much starter goes in. Move the inoculation slider and you move between them.",
+      dDe:"Ein Teig, drei Zeitpläne — die Varianten 48–72 Std., 24–48 Std. und 6–24 Std. unterscheiden sich nur in der Menge Sauerteig. Mit dem Anstellgut-Regler bewegst du dich zwischen ihnen.",
+      f:{white:0,spelt:510,wheat:0,ww:0,rye:0}, w:292, s:16, sd:70 },
+    { id:"ru", st:"spelt", pizza:true, fresh:true, en:"Rustica pizza / bread", de:"Rustica-Pizza / -Brot",
+      dEn:"The spelt formula with a tenth of the flour swapped for whole wheat. Darker, nuttier, a little less extensible.",
+      dDe:"Die Dinkelformel mit einem Zehntel des Mehls als Vollkornweizen. Dunkler, nüssiger, etwas weniger dehnbar.",
+      f:{white:0,spelt:455,wheat:0,ww:55,rye:0}, w:292, s:16, sd:70 },
+    { id:"ry", st:"rye", en:"Rye bread", de:"Roggenbrot",
+      dEn:"Pure rye off the rye starter. Dense by design — it will not spring like the others, and it is not supposed to.",
+      dDe:"Reiner Roggen aus dem Roggen-Sauerteig. Dicht von Natur aus — kein Ofentrieb wie bei den anderen, und das soll auch so sein.",
+      f:{white:0,spelt:0,wheat:0,ww:0,rye:487.5}, w:410, s:18, sd:100 },
+    { id:"fo", st:"spelt", en:"Focaccia", de:"Focaccia",
+      dEn:"All spelt at 91% — the highest hydration here, and the most forgiving. Oiled tray, not a pot.",
+      dDe:"Reiner Dinkel bei 91% — die höchste Hydration hier und die nachsichtigste. Geöltes Blech statt Topf.",
+      f:{white:0,spelt:400,wheat:0,ww:0,rye:0}, w:360, s:12, sd:100 },
+    { id:"ps", st:"spelt", en:"Pagnotta, semi-dry", de:"Pagnotta, halbtrocken",
+      dEn:"Four flours at 70% — the driest formula here. Shapes like a conventional loaf.",
+      dDe:"Vier Mehle bei 70% — die trockenste Formel hier. Lässt sich wie ein normaler Laib formen.",
+      f:{white:420,spelt:240,wheat:200,ww:0,rye:45}, w:600, s:20, sd:200 }
+  ];
+
+  // ---- observations (what was actually baked) ------------------------------
+  var OBS = [
+    { en:"Spelt, 48–72 h", de:"Dinkel, 48–72 Std.", i:8.35,  salt:3.145, hyd:60.2, lo:48, hi:72, fit:true },
+    { en:"Spelt, 24–48 h", de:"Dinkel, 24–48 Std.", i:12.84, salt:2.936, hyd:60.0, lo:24, hi:48, fit:true },
+    { en:"Spelt, 6–24 h",  de:"Dinkel, 6–24 Std.",  i:17.86, salt:2.857, hyd:61.6, lo:6,  hi:24, fit:true },
+    { en:"Rye bread",          de:"Roggenbrot",             i:18.60, salt:3.349, hyd:85.6, lo:6,  hi:24, fit:false },
+    { en:"Focaccia",           de:"Focaccia",               i:22.22, salt:2.667, hyd:91.1, lo:6,  hi:24, fit:false },
+    { en:"Pagnotta, semi-dry", de:"Pagnotta, halbtrocken",  i:19.90, salt:1.990, hyd:69.7, lo:6,  hi:24, fit:false }
+  ];
+
+  // flours, lightest to darkest — a sequential ramp, not five peer categories
+  var FL = [
+    {k:"white", en:"White flour",       de:"Weissmehl",         c:"var(--f1)"},
+    {k:"spelt", en:"Spelt flour",       de:"Dinkelmehl",        c:"var(--f2)"},
+    {k:"wheat", en:"Wheat flour",       de:"Weizenmehl",        c:"var(--f3)"},
+    {k:"ww",    en:"Whole wheat flour", de:"Vollkornweizen",    c:"var(--f4)"},
+    {k:"rye",   en:"Rye flour",         de:"Roggenmehl",        c:"var(--f5)"}
+  ];
+
+  var TREF = 5, TROOM = 21, BALL = 280, Q10S = [2.0, 2.5, 3.0], Q10C = 2.5;
+
+  // The model is fitted here, in the page, from the three spelt bakes — not hardcoded.
+  // Each bake is an interval, so we fit three lines: through the window lows, the
+  // geometric midpoints, and the highs. The mid line is the estimate; the spread of
+  // the other two (across a defensible range of Q10) is the band.
+  var FITC = {};
+  function fitModel(q10, warmh, which){
+    var key = q10 + "|" + warmh + "|" + which;
+    if (FITC[key]) return FITC[key];
+    var we = warmh * Math.pow(q10, (TROOM - TREF) / 10), xs = [], ys = [], i, o;
+    for (i = 0; i < OBS.length; i++){
+      o = OBS[i];
+      if (!o.fit) continue;
+      xs.push(Math.log(o.i));
+      ys.push(Math.log(we + (which === "lo" ? o.lo : which === "hi" ? o.hi : Math.sqrt(o.lo * o.hi))));
+    }
+    var n = xs.length, mx = 0, my = 0, sxy = 0, sxx = 0;
+    for (i = 0; i < n; i++){ mx += xs[i] / n; my += ys[i] / n; }
+    for (i = 0; i < n; i++){ sxy += (xs[i] - mx) * (ys[i] - my); sxx += (xs[i] - mx) * (xs[i] - mx); }
+    var b = sxy / sxx;
+    return (FITC[key] = { A: Math.exp(my - b * mx), B: b, q: q10 });
+  }
+  function rate(T, q10){ return Math.pow(q10 === undefined ? Q10C : q10, (T - TREF) / 10); }
+  function warmEq(h, q10){ return h * rate(TROOM, q10); }
+  function fridgeOf(m, i, T, h){ return Math.max(0, (m.A * Math.pow(i, m.B) - warmEq(h, m.q)) / rate(T, m.q)); }
+  function dose(i, h){ var m = fitModel(Q10C, h, "mid"); return m.A * Math.pow(i, m.B); }
+  function fridgeH(i, T, h){ return fridgeOf(fitModel(Q10C, h, "mid"), i, T, h); }
+
+  function bandT(i, T, h){
+    var lo = Infinity, hi = 0, k, w, v;
+    for (k = 0; k < Q10S.length; k++)
+      for (w = 0; w < 2; w++){
+        v = fridgeOf(fitModel(Q10S[k], h, w ? "hi" : "lo"), i, T, h);
+        if (v < lo) lo = v; if (v > hi) hi = v;
+      }
+    return { lo: lo, hi: hi };
+  }
+  function inoOf(m, t, T, h){
+    return Math.pow((t * rate(T, m.q) + warmEq(h, m.q)) / m.A, 1 / m.B);
+  }
+  function solveIno(t, T, h){ return inoOf(fitModel(Q10C, h, "mid"), t, T, h); }
+  function bandI(t, T, h){
+    var lo = Infinity, hi = 0, k, w, v;
+    for (k = 0; k < Q10S.length; k++)
+      for (w = 0; w < 2; w++){
+        v = inoOf(fitModel(Q10S[k], h, w ? "hi" : "lo"), t, T, h);
+        if (v < lo) lo = v; if (v > hi) hi = v;
+      }
+    return { lo: lo, hi: hi };
+  }
+
+  var GMIN = 2, GMAX = 120;
+  function goalToH(v){ return GMIN * Math.pow(GMAX / GMIN, v / 1000); }
+  function hToGoal(t){ return 1000 * Math.log(Math.max(GMIN, Math.min(GMAX, t)) / GMIN) / Math.log(GMAX / GMIN); }
+
+  var lang = "en", cur = R[0], dough = 888, hyd = 60, ino = 12.8, temp = 5, warm = 3, mode = "fwd", goalH = 29;
+  try { var ls = localStorage.getItem("bb-lang"); if (ls === "de" || ls === "en") lang = ls; } catch (e) {}
+
+  function L(o){ return lang === "de" ? o.de : o.en; }
+  function num(n, d){ return n.toLocaleString(lang === "de" ? "de-CH" : "en-GB", {minimumFractionDigits:d||0, maximumFractionDigits:d||0}); }
+  function pc(n, d){ return num(n, d === undefined ? 1 : d) + "%"; }
+  function hours(h){ return h < 1 ? num(h * 60, 0) + " min" : h < 10 ? num(h, 1) + " h" : num(h, 0) + " h"; }
+  function deg(v){ return num(v, v % 1 ? 1 : 0) + " °C"; }
+  function rangeH(lo, hi){
+    var d = hi < 10 ? 1 : 0;
+    return (lo < 0.05 ? "0" : num(lo, d)) + "–" + num(hi, d) + " h";
+  }
+  function rangePc(lo, hi){ return num(lo, 1) + "–" + num(hi, 1) + "%"; }
+
+  function base(r){
+    var flour = 0, k;
+    for (k in r.f) flour += r.f[k];
+    flour += r.sd / 2;
+    return { flour:flour, hyd:(r.w + r.sd / 2) / flour * 100, ino:r.sd / flour * 100,
+             saltPc:r.s / flour * 100, dough:flour + r.w + r.sd / 2 + r.s };
+  }
+
+  function build(){
+    var b = base(cur), sp = b.saltPc / 100, h = hyd / 100, i = ino / 100;
+    var F = dough / (1 + h + sp), S = i * F, W = h * F, salt = sp * F;
+    var addedFlour = F - S / 2, addedWater = W - S / 2;
+    var raw = 0, k, parts = {};
+    for (k in cur.f) raw += cur.f[k];
+    for (k in cur.f) parts[k] = raw > 0 ? cur.f[k] / raw * addedFlour : 0;
+    return { F:F, W:W, S:S, salt:salt, addedWater:addedWater, parts:parts, dough:dough };
+  }
+  function share(o, key){ return (o.parts[key] + (cur.st === key ? o.S / 2 : 0)) / o.F; }
+
+  // ---------------- chips ----------------
+  function chips(){
+    var box = document.getElementById("chips");
+    box.innerHTML = "";
+    R.forEach(function(r){
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "chip";
+      b.setAttribute("aria-pressed", r === cur ? "true" : "false");
+      b.innerHTML = (r.st === "rye" ? '<span class="dot">◆ </span>' : "") + L(r);
+      b.addEventListener("click", function(){ cur = r; resetSliders(); draw(); });
+      box.appendChild(b);
+    });
+  }
+  function markChips(){
+    var b = document.querySelectorAll("#chips .chip"), i;
+    for (i = 0; i < b.length; i++) b[i].setAttribute("aria-pressed", R[i] === cur ? "true" : "false");
+  }
+
+  function resetSliders(){
+    var b = base(cur);
+    dough = Math.round(b.dough / 20) * 20; hyd = Math.round(b.hyd * 2) / 2;
+    ino = Math.round(b.ino * 10) / 10; temp = 5; warm = 3;
+    if (mode === "inv"){ goalH = Math.max(GMIN, Math.min(GMAX, fridgeH(ino, temp, warm) || 24));
+      document.getElementById("s-goal").value = hToGoal(goalH); }
+    document.getElementById("s-dough").value = dough;
+    document.getElementById("s-hyd").value = hyd;
+    document.getElementById("s-ino").value = ino;
+    document.getElementById("s-temp").value = temp;
+    document.getElementById("s-warm").value = warm;
+  }
+
+  // ---------------- donut ----------------
+  var SEG = null, RAD = 0, raf = null;
+  var REDUCED = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function segments(o){
+    var out = [], i, F;
+    for (i = 0; i < FL.length; i++){
+      F = FL[i];
+      out.push({ key:F.k, v:o.parts[F.k], c:F.c, hatch:false });
+    }
+    var stF = FL.filter(function(f){ return f.k === cur.st; })[0] || FL[1];
+    out.push({ key:"sflour", v:o.S / 2, c:stF.c, hatch:true });
+    out.push({ key:"swater", v:o.S / 2, c:"var(--water)", hatch:true });
+    out.push({ key:"water",  v:o.addedWater, c:"var(--water)", hatch:false });
+    out.push({ key:"salt",   v:o.salt, c:"var(--salt)", hatch:false });
+    return out;
+  }
+
+  function arc(cx, cy, r0, r1, a0, a1){
+    if (a1 - a0 < 0.0001) return "";
+    var big = (a1 - a0) > Math.PI ? 1 : 0;
+    function P(r, a){ return [(cx + r * Math.sin(a)).toFixed(2), (cy - r * Math.cos(a)).toFixed(2)]; }
+    var p1 = P(r1, a0), p2 = P(r1, a1), p3 = P(r0, a1), p4 = P(r0, a0);
+    return "M" + p1 + "A" + r1 + "," + r1 + " 0 " + big + " 1 " + p2 +
+           "L" + p3 + "A" + r0 + "," + r0 + " 0 " + big + " 0 " + p4 + "Z";
+  }
+  function el(n, a){ var e = document.createElementNS("http://www.w3.org/2000/svg", n), k; for (k in a) e.setAttribute(k, a[k]); return e; }
+
+  function paintDonut(segs, radius){
+    var svg = document.getElementById("donut");
+    svg.innerHTML = "";
+    var defs = el("defs", {}), pat = el("pattern", {id:"hatch", width:6, height:6,
+      patternUnits:"userSpaceOnUse", patternTransform:"rotate(45)"});
+    pat.appendChild(el("rect", {width:6, height:6, fill:"var(--paper-2)", opacity:0}));
+    pat.appendChild(el("line", {x1:0, y1:0, x2:0, y2:6, stroke:"var(--paper-2)", "stroke-width":2.4, opacity:.85}));
+    defs.appendChild(pat); svg.appendChild(defs);
+
+    var CX = 150, CY = 150, R1 = radius, R0 = radius * 0.56;
+    var total = 0, i;
+    for (i = 0; i < segs.length; i++) total += Math.max(0, segs[i].v);
+    if (total <= 0) return;
+
+    // schedule ring
+    var fh = fridgeH(ino, temp, warm), tot = warm + fh, RS = Math.max(radius + 26, 112);
+    if (tot > 0){
+      var wa = warm / tot * Math.PI * 2;
+      var p = el("path", {d:arc(CX, CY, RS - 3.5, RS + 3.5, 0, wa), fill:"var(--live)", opacity:.9});
+      svg.appendChild(p);
+      svg.appendChild(el("path", {d:arc(CX, CY, RS - 3.5, RS + 3.5, wa + .012, Math.PI * 2 - .001), fill:"var(--ink-faint)", opacity:.34}));
+    }
+
+    var a = 0, sf = null, sw = null;
+    for (i = 0; i < segs.length; i++){
+      var v = Math.max(0, segs[i].v);
+      if (v / total < 0.0008) continue;
+      var a1 = a + v / total * Math.PI * 2;
+      svg.appendChild(el("path", {d:arc(CX, CY, R0, R1, a + .008, a1 - .008), fill:segs[i].c}));
+      if (segs[i].hatch)
+        svg.appendChild(el("path", {d:arc(CX, CY, R0, R1, a + .008, a1 - .008), fill:"url(#hatch)"}));
+      if (segs[i].key === "sflour") sf = a;
+      if (segs[i].key === "swater") sw = a1;
+      a = a1;
+    }
+
+    // bracket across the starter's two halves
+    if (sf !== null && sw !== null && sw - sf > 0.03){
+      var RB = R1 + 9;
+      svg.appendChild(el("path", {d:arc(CX, CY, RB, RB + 1.4, sf, sw), fill:"var(--ink-soft)", opacity:.75}));
+      var mid = (sf + sw) / 2, lx = CX + (RB + 13) * Math.sin(mid), ly = CY - (RB + 13) * Math.cos(mid);
+      var tx = el("text", {x:lx.toFixed(1), y:ly.toFixed(1), "class":"brk",
+        "text-anchor": Math.sin(mid) < -0.2 ? "end" : (Math.sin(mid) > 0.2 ? "start" : "middle"),
+        "dominant-baseline":"middle"});
+      tx.textContent = lang === "de" ? "Sauerteig · 50/50" : "starter · 50/50";
+      svg.appendChild(tx);
+    }
+
+    var t1 = el("text", {x:CX, y:CY - 4, "class":"ctr", "text-anchor":"middle", style:"font-size:25px"});
+    t1.textContent = num(dough) + " g";
+    var t2 = el("text", {x:CX, y:CY + 14, "class":"ctrsub", "text-anchor":"middle"});
+    t2.textContent = lang === "de" ? "TEIG" : "DOUGH";
+    svg.appendChild(t1); svg.appendChild(t2);
+  }
+
+  function animate(target, targetR){
+    if (!SEG){ SEG = target.map(function(s){ return {key:s.key, v:s.v, c:s.c, hatch:s.hatch}; }); RAD = targetR; paintDonut(SEG, RAD); return; }
+    if (REDUCED){ SEG = target; RAD = targetR; paintDonut(SEG, RAD); return; }
+    var from = SEG.map(function(s){ return s.v; }), fromR = RAD, t0 = null;
+    if (raf) cancelAnimationFrame(raf);
+    function step(ts){
+      if (t0 === null) t0 = ts;
+      var k = Math.min(1, (ts - t0) / 420), e = 1 - Math.pow(1 - k, 3), i;
+      for (i = 0; i < target.length; i++){
+        SEG[i].v = from[i] + (target[i].v - from[i]) * e;
+        SEG[i].c = target[i].c; SEG[i].hatch = target[i].hatch;
+      }
+      RAD = fromR + (targetR - fromR) * e;
+      paintDonut(SEG, RAD);
+      if (k < 1) raf = requestAnimationFrame(step);
+    }
+    raf = requestAnimationFrame(step);
+  }
+
+  // ---------------- main render ----------------
+  function draw(){
+    if (mode === "inv"){
+      ino = Math.max(3, Math.min(30, solveIno(goalH, temp, warm)));
+      document.getElementById("s-ino").value = ino.toFixed(1);
+    }
+    var o = build(), b = base(cur), i;
+
+    markChips();
+    document.getElementById("t-name").textContent = L(cur);
+    document.getElementById("t-desc").innerHTML = (lang === "de" ? cur.dDe : cur.dEn) +
+      (cur.fresh ? " <span style='color:var(--ink-faint)'>" + (lang === "de"
+        ? "Noch kein Backvorgang im Datensatz."
+        : "No bake logged in the dataset yet.") + "</span>" : "");
+
+    document.getElementById("v-dough").textContent = num(dough) + " g";
+    document.getElementById("v-hyd").textContent = pc(hyd);
+    document.getElementById("v-ino").textContent = pc(ino);
+    document.getElementById("v-goal").textContent = hours(goalH);
+    document.getElementById("v-temp").textContent = deg(temp);
+    document.getElementById("v-warm").textContent = num(warm, warm % 1 ? 1 : 0) + " h";
+    document.getElementById("v-hyd").className = Math.abs(hyd - b.hyd) > 0.6 ? "off" : "";
+    document.getElementById("v-ino").className = Math.abs(ino - b.ino) > 0.15 ? "off" : "";
+
+    var rows = document.getElementById("rows");
+    rows.innerHTML = "";
+    function row(label, grams, pct, cls){
+      var tr = document.createElement("tr");
+      if (cls) tr.className = cls;
+      tr.innerHTML = "<td>" + label + "</td><td>" + num(grams) + "</td><td class='pc'>" +
+        (pct === null ? "—" : pc(pct * 100)) + "</td>";
+      rows.appendChild(tr);
+    }
+    for (i = 0; i < FL.length; i++)
+      row(L(FL[i]), o.parts[FL[i].k], o.parts[FL[i].k] / o.F, o.parts[FL[i].k] < 0.5 ? "zero" : "");
+    row(lang === "de" ? "Wasser" : "Water", o.addedWater, o.addedWater / o.F);
+    row(lang === "de" ? "Salz" : "Salt", o.salt, o.salt / o.F);
+    row((lang === "de" ? "Sauerteig" : "Starter") + " · " +
+        (cur.st === "rye" ? (lang === "de" ? "Roggen" : "rye") : (lang === "de" ? "Dinkel" : "spelt")), o.S, o.S / o.F);
+    row("<b>" + (lang === "de" ? "Teig gesamt" : "Total dough") + "</b>", o.dough, null, "sum");
+
+    // pizza balls
+    var pb = document.getElementById("pizza-box");
+    if (cur.pizza){
+      pb.hidden = false;
+      var n = dough / BALL, whole = Math.floor(n + 1e-9), left = dough - whole * BALL;
+      document.getElementById("pizza-n").textContent = num(n, 1) + "×";
+      document.getElementById("pizza-note").textContent = lang === "de"
+        ? whole + " Kugeln à 280 g" + (left >= 20 ? ", " + num(left) + " g übrig" : left > 0 ? ", Rest vernachlässigbar" : " — geht genau auf")
+        : whole + " balls of 280 g" + (left >= 20 ? ", " + num(left) + " g left over" : left > 0 ? ", remainder negligible" : " — exact");
+    } else pb.hidden = true;
+
+    // donut + legend
+    var segs = segments(o);
+    var rr = 74 + (Math.sqrt(dough) - Math.sqrt(300)) / (Math.sqrt(4000) - Math.sqrt(300)) * 34;
+    animate(segs, rr);
+
+    var leg = document.getElementById("legend");
+    leg.innerHTML = "";
+    function lrow(colour, name, grams, pct){
+      leg.innerHTML += "<span><i style='background:" + colour + "'></i>" + name + "</span><b>" +
+        num(grams) + " g</b><span class='pc'>" + pct + "</span>";
+    }
+    for (i = 0; i < FL.length; i++){
+      var g = o.parts[FL[i].k] + (cur.st === FL[i].k ? o.S / 2 : 0);
+      if (g < 0.5) continue;
+      lrow(FL[i].c, L(FL[i]), g, pc(share(o, FL[i].k) * 100));
+    }
+    lrow("var(--water)", lang === "de" ? "Wasser" : "Water", o.W, pc(hyd));
+    lrow("var(--salt)", lang === "de" ? "Salz" : "Salt", o.salt, pc(o.salt / o.F * 100));
+    leg.innerHTML += "<span class='sub'>" + (lang === "de"
+      ? "Schraffiert: die " + num(o.S) + " g Sauerteig — " + num(o.S / 2) + " g Mehl + " + num(o.S / 2) + " g Wasser, in den Zahlen oben schon enthalten."
+      : "Hatched: the " + num(o.S) + " g of starter — " + num(o.S / 2) + " g flour + " + num(o.S / 2) + " g water, already inside the numbers above.") + "</span>";
+
+    var fh = fridgeH(ino, temp, warm), we = warmEq(warm);
+    document.getElementById("sched").innerHTML =
+      "<span><i style='background:var(--live)'></i>" + num(warm, warm % 1 ? 1 : 0) + " h @ 21 °C</span>" +
+      "<span><i style='background:var(--ink-faint);opacity:.5'></i>" + (function(){ var q = bandT(ino, temp, warm); return rangeH(q.lo, q.hi); })() + " @ " + deg(temp) + "</span>";
+
+    if (mode === "fwd"){
+      var bt = bandT(ino, temp, warm);
+      document.getElementById("est-cap").textContent = lang === "de" ? "ZEIT IM KÜHLSCHRANK" : "TIME IN THE FRIDGE";
+      document.getElementById("est-t").textContent = bt.hi < 0.05
+        ? (lang === "de" ? "keine — direkt backen" : "none — bake it")
+        : rangeH(bt.lo, bt.hi);
+      document.getElementById("est-range").textContent = "";
+      document.getElementById("est-note").textContent = lang === "de"
+        ? "Spanne, keine Zahl — sie kommt aus der Breite der eigenen Fenster. Danach kommen noch " +
+          num(warm, warm % 1 ? 1 : 0) + " h bei 21 °C dazu (wert: " + hours(we) + " Kälte). Gesamtdosis " +
+          num(dose(ino, warm), 0) + " Kühlstunden."
+        : "A range, not a number — it comes from the width of your own windows. On top of it sit " +
+          num(warm, warm % 1 ? 1 : 0) + " h at 21 °C (worth " + hours(we) + " of cold). Total dose " +
+          num(dose(ino, warm), 0) + " fridge-hours.";
+    } else {
+      var bi = bandI(goalH, temp, warm), gLo = bi.lo / 100 * o.F, gHi = bi.hi / 100 * o.F;
+      document.getElementById("est-cap").textContent = lang === "de" ? "SAUERTEIG DAFÜR" : "STARTER TO GET THERE";
+      document.getElementById("est-t").textContent = rangePc(bi.lo, bi.hi);
+      document.getElementById("est-range").innerHTML = "<b>" + num(gLo) + "–" + num(gHi) + " g</b>";
+      document.getElementById("est-note").textContent = lang === "de"
+        ? "Um nach " + num(warm, warm % 1 ? 1 : 0) + " h bei 21 °C noch " + hours(goalH) + " bei " + deg(temp) +
+          " zu brauchen. Die Tabelle rechnet mit der Mitte der Spanne."
+        : "To still need " + hours(goalH) + " at " + deg(temp) + " after " + num(warm, warm % 1 ? 1 : 0) +
+          " h at 21 °C. The table is weighed out at the middle of that range.";
+    }
+
+    plot();
+  }
+
+  // ---------------- scatter ----------------
+  var PAD = { l:60, r:18, t:18, b:46 }, CW = 760, CH = 400;
+  var X0 = Math.log10(3.5), X1 = Math.log10(34), Y0 = Math.log10(1.5), Y1 = Math.log10(300);
+  function px(v){ return PAD.l + (Math.log10(v) - X0) / (X1 - X0) * (CW - PAD.l - PAD.r); }
+  function py(v){ return PAD.t + (1 - (Math.log10(v) - Y0) / (Y1 - Y0)) * (CH - PAD.t - PAD.b); }
+
+  function plot(){
+    var svg = document.getElementById("chart"), i, g;
+    svg.innerHTML = "";
+    var xt = [4,6,8,12,16,24,32], yt = [2,4,8,16,32,64,128,256];
+    for (i = 0; i < yt.length; i++){
+      svg.appendChild(el("line", {x1:PAD.l, x2:CW - PAD.r, y1:py(yt[i]), y2:py(yt[i]), "class":"grid"}));
+      g = el("text", {x:PAD.l - 10, y:py(yt[i]) + 3.5, "text-anchor":"end"}); g.textContent = yt[i] + "h"; svg.appendChild(g);
+    }
+    for (i = 0; i < xt.length; i++){
+      svg.appendChild(el("line", {x1:px(xt[i]), x2:px(xt[i]), y1:PAD.t, y2:CH - PAD.b, "class":"grid"}));
+      g = el("text", {x:px(xt[i]), y:CH - PAD.b + 18, "text-anchor":"middle"}); g.textContent = xt[i] + "%"; svg.appendChild(g);
+    }
+    svg.appendChild(el("line", {x1:PAD.l, x2:CW - PAD.r, y1:CH - PAD.b, y2:CH - PAD.b, "class":"axis"}));
+    svg.appendChild(el("line", {x1:PAD.l, x2:PAD.l, y1:PAD.t, y2:CH - PAD.b, "class":"axis"}));
+    g = el("text", {x:CW - PAD.r, y:CH - 10, "text-anchor":"end", "class":"axtitle"});
+    g.textContent = lang === "de" ? "Anstellgut (% des Gesamtmehls)" : "Inoculation (% of total flour)"; svg.appendChild(g);
+    g = el("text", {x:-(PAD.t), y:14, transform:"rotate(-90)", "text-anchor":"end", "class":"axtitle"});
+    g.textContent = lang === "de" ? "Zeit im Kühlschrank (Std., log)" : "Time in the fridge (h, log)"; svg.appendChild(g);
+
+    // plausible-range band, drawn first so the marks sit on top
+    (function(){
+      var top = [], bot = [], x, y, k;
+      for (x = 3.5; x <= 34.001; x *= 1.03){
+        var bb = bandT(x, temp, warm);
+        top.push([px(x), py(Math.max(1.5, Math.min(300, bb.hi)))]);
+        bot.push([px(x), py(Math.max(1.5, Math.min(300, bb.lo)))]);
+      }
+      var d = "";
+      for (k = 0; k < top.length; k++) d += (k ? "L" : "M") + top[k][0].toFixed(1) + "," + top[k][1].toFixed(1);
+      for (k = bot.length - 1; k >= 0; k--) d += "L" + bot[k][0].toFixed(1) + "," + bot[k][1].toFixed(1);
+      svg.appendChild(el("path", {d:d + "Z", fill:"var(--data)", opacity:.13, stroke:"none"}));
+    })();
+
+    function curve(T, h, dash, op){
+      var d = "", x;
+      for (x = 3.5; x <= 34.001; x *= 1.03){
+        var y = fridgeH(x, T, h);
+        if (y > 300 || y < 1.5) continue;
+        d += (d ? "L" : "M") + px(x).toFixed(1) + "," + py(y).toFixed(1);
+      }
+      if (d) svg.appendChild(el("path", {d:d, fill:"none", stroke:"var(--data)", "stroke-width":2,
+        "stroke-dasharray":dash || "", opacity:op || 1, "stroke-linecap":"round"}));
+    }
+    if (Math.abs(temp - TREF) > 0.01 || Math.abs(warm - 3) > 0.01) curve(TREF, 3, "3 4", .3);
+    curve(temp, warm);
+
+    for (i = 0; i < OBS.length; i++){
+      var r = OBS[i], mid = Math.sqrt(r.lo * r.hi), X = px(r.i);
+      svg.appendChild(el("line", {x1:X, x2:X, y1:py(r.lo), y2:py(r.hi), stroke:"var(--data)",
+        "stroke-width":2, opacity:r.fit ? .5 : .25, "stroke-linecap":"round"}));
+      svg.appendChild(el("circle", {cx:X, cy:py(mid), r:5.5, fill:r.fit ? "var(--data)" : "var(--paper-2)",
+        stroke:r.fit ? "var(--paper-2)" : "var(--data)", "stroke-width":2}));
+      var hit = el("circle", {cx:X, cy:py(mid), r:15, fill:"transparent", style:"cursor:pointer"});
+      (function(rr, cx, cy){
+        hit.addEventListener("mouseenter", function(){ tip(cx, cy, L(rr), num(rr.i,1) + "% · " + rr.lo + "–" + rr.hi + " h"); });
+        hit.addEventListener("mouseleave", clearTip);
+      })(r, X, py(mid));
+      svg.appendChild(hit);
+    }
+
+    function clampY(v){ return Math.max(1.6, Math.min(295, v)); }
+    if (mode === "fwd"){
+      var bt = bandT(ino, temp, warm);
+      if (bt.hi > 1.5 && ino >= 3.5 && ino <= 34){
+        var LX = px(ino), yA = py(clampY(bt.hi)), yB = py(clampY(bt.lo));
+        svg.appendChild(el("line", {x1:LX, x2:LX, y1:yB, y2:CH - PAD.b, stroke:"var(--live)", "stroke-width":1, "stroke-dasharray":"2 4"}));
+        svg.appendChild(el("line", {x1:PAD.l, x2:LX, y1:yA, y2:yA, stroke:"var(--live)", "stroke-width":1, "stroke-dasharray":"2 4", opacity:.6}));
+        svg.appendChild(el("line", {x1:PAD.l, x2:LX, y1:yB, y2:yB, stroke:"var(--live)", "stroke-width":1, "stroke-dasharray":"2 4", opacity:.6}));
+        svg.appendChild(el("line", {x1:LX, x2:LX, y1:yA, y2:yB, stroke:"var(--live)", "stroke-width":4, "stroke-linecap":"round"}));
+        var lab = el("text", {x:LX + 12, y:(yA + yB) / 2 + 4, fill:"var(--live)", style:"font-weight:600"});
+        lab.textContent = rangeH(bt.lo, bt.hi);
+        if (LX > CW - 130){ lab.setAttribute("x", LX - 12); lab.setAttribute("text-anchor", "end"); }
+        svg.appendChild(lab);
+      }
+    } else {
+      var bi2 = bandI(goalH, temp, warm), GY = py(clampY(goalH));
+      var xA = px(Math.max(3.5, Math.min(34, bi2.lo))), xB = px(Math.max(3.5, Math.min(34, bi2.hi)));
+      svg.appendChild(el("line", {x1:PAD.l, x2:xB, y1:GY, y2:GY, stroke:"var(--live)", "stroke-width":1, "stroke-dasharray":"2 4"}));
+      svg.appendChild(el("line", {x1:xA, x2:xA, y1:GY, y2:CH - PAD.b, stroke:"var(--live)", "stroke-width":1, "stroke-dasharray":"2 4", opacity:.6}));
+      svg.appendChild(el("line", {x1:xB, x2:xB, y1:GY, y2:CH - PAD.b, stroke:"var(--live)", "stroke-width":1, "stroke-dasharray":"2 4", opacity:.6}));
+      svg.appendChild(el("line", {x1:xA, x2:xB, y1:GY, y2:GY, stroke:"var(--live)", "stroke-width":4, "stroke-linecap":"round"}));
+      var lab2 = el("text", {x:(xA + xB) / 2, y:GY - 12, fill:"var(--live)", "text-anchor":"middle", style:"font-weight:600"});
+      lab2.textContent = rangePc(bi2.lo, bi2.hi);
+      svg.appendChild(lab2);
+    }
+
+    document.getElementById("keys").innerHTML =
+      "<span><svg width='14' height='14'><circle cx='7' cy='7' r='5' fill='var(--data)'></circle></svg>" +
+      (lang === "de" ? "im Fit (n = 3)" : "in the fit (n = 3)") + "</span>" +
+      "<span><svg width='14' height='14'><circle cx='7' cy='7' r='4.5' fill='none' stroke='var(--data)' stroke-width='2'></circle></svg>" +
+      (lang === "de" ? "festes Fenster, ausgeschlossen" : "fixed bracket, excluded") + "</span>" +
+      "<span><svg width='16' height='14'><rect x='1' y='3' width='14' height='8' fill='var(--data)' opacity='.2'></rect></svg>" +
+      (lang === "de" ? "plausible Spanne" : "plausible range") + "</span>" +
+      "<span><svg width='16' height='14'><line x1='1' y1='7' x2='15' y2='7' stroke='var(--data)' stroke-width='2'></line></svg>" +
+      (lang === "de" ? "Modell, " : "model, ") + num(warm, warm % 1 ? 1 : 0) + " h @ 21 °C + " + deg(temp) + "</span>" +
+      "<span><svg width='14' height='14'><line x1='7' y1='1' x2='7' y2='13' stroke='var(--live)' stroke-width='4' stroke-linecap='round'></line></svg>" +
+      (lang === "de" ? "aktuelle Spanne" : "current range") + "</span>";
+
+    document.getElementById("cap").textContent = lang === "de"
+      ? "Beide Achsen logarithmisch. Der senkrechte Strich ist das Kühlfenster des jeweiligen Backvorgangs, der Punkt sein geometrischer Mittelwert — die Beobachtung ist ein Intervall, kein Zeitpunkt."
+      : "Both axes logarithmic. The vertical line is each bake's fridge window and the dot its geometric midpoint — the observation is an interval, not a point.";
+  }
+
+  function tip(x, y, l1, l2){
+    clearTip();
+    var svg = document.getElementById("chart"), g = el("g", {"class":"tip"});
+    var w = Math.max(l1.length, l2.length) * 6.2 + 18, h = 34;
+    var bx = Math.min(Math.max(x - w / 2, PAD.l), CW - PAD.r - w), by = y - h - 14;
+    if (by < PAD.t) by = y + 14;
+    g.appendChild(el("rect", {x:bx, y:by, width:w, height:h, rx:2}));
+    var t1 = el("text", {x:bx + 9, y:by + 14}); t1.textContent = l1;
+    var t2 = el("text", {x:bx + 9, y:by + 27, opacity:.72}); t2.textContent = l2;
+    g.appendChild(t1); g.appendChild(t2); svg.appendChild(g);
+  }
+  function clearTip(){ var t = document.querySelector("#chart .tip"); if (t) t.parentNode.removeChild(t); }
+
+  function dataTable(){
+    var tb = document.getElementById("datarows");
+    tb.innerHTML = "";
+    OBS.forEach(function(r){
+      var tr = document.createElement("tr");
+      if (r.fit) tr.className = "fitrow";
+      tr.innerHTML = "<td>" + L(r) + (r.flag ? " <span style='color:var(--live)'>*</span>" : "") + "</td><td>" +
+        num(r.i, 1) + "%</td><td>" + num(r.i / 2, 1) + "%</td><td>" + num(r.salt, 2) + "%</td><td>" +
+        num(r.hyd, 1) + "%</td><td>" + r.lo + "–" + r.hi + " h</td><td>" +
+        (r.fit ? "<span class='mk'>●</span>" : "<span class='mk'>○</span>") + "</td>";
+      tb.appendChild(tr);
+    });
+  }
+
+  function days(){
+    var box = document.getElementById("days");
+    box.innerHTML = "";
+    for (var d = 0; d <= 12; d++){
+      var c = document.createElement("div");
+      c.className = "day" + (d === 3 ? " mark" : "");
+      var txt = d === 0
+        ? (lang === "de" ? "50 g Mehl + 50 g Wasser, verrühren." : "50 g flour + 50 g water, stir.")
+        : d === 3
+          ? (lang === "de" ? "Hälfte weg, 50 g + 50 g. Geruch nach alten Socken — erwartet." : "Discard half, 50 g + 50 g. Smells of old socks — expected.")
+          : (lang === "de" ? "Hälfte weg, 50 g + 50 g." : "Discard half, 50 g + 50 g.");
+      c.innerHTML = "<b>" + (lang === "de" ? "Tag " : "Day ") + d + "</b><span>" + txt + "</span>";
+      box.appendChild(c);
+    }
+  }
+
+  function applyLang(){
+    var n = document.querySelectorAll("[data-en]"), i;
+    for (i = 0; i < n.length; i++){
+      var v = n[i].getAttribute(lang === "de" ? "data-de" : "data-en");
+      if (v) n[i].innerHTML = v;
+    }
+    var b = document.querySelectorAll(".lang button");
+    for (i = 0; i < b.length; i++) b[i].setAttribute("aria-pressed", b[i].getAttribute("data-lang") === lang ? "true" : "false");
+    document.documentElement.setAttribute("lang", lang);
+  }
+
+  function bind(id, fn){
+    var e = document.getElementById(id);
+    e.addEventListener("input", function(){ fn(parseFloat(e.value)); draw(); });
+  }
+  bind("s-dough", function(v){ dough = v; });
+  bind("s-hyd",   function(v){ hyd = v; });
+  bind("s-ino",   function(v){ ino = v; });
+  bind("s-temp",  function(v){ temp = v; });
+  bind("s-warm",  function(v){ warm = v; });
+  bind("s-goal",  function(v){ goalH = goalToH(v); });
+
+  var mb = document.querySelectorAll(".modes button");
+  for (var m = 0; m < mb.length; m++){
+    mb[m].addEventListener("click", function(){
+      mode = this.getAttribute("data-mode");
+      var i2;
+      for (i2 = 0; i2 < mb.length; i2++) mb[i2].setAttribute("aria-pressed", mb[i2].getAttribute("data-mode") === mode ? "true" : "false");
+      document.getElementById("w-ino").hidden = mode === "inv";
+      document.getElementById("w-goal").hidden = mode === "fwd";
+      if (mode === "inv"){
+        goalH = Math.max(GMIN, Math.min(GMAX, fridgeH(ino, temp, warm) || 24));
+        document.getElementById("s-goal").value = hToGoal(goalH);
+      }
+      draw();
+    });
+  }
+  document.getElementById("reset").addEventListener("click", function(){ resetSliders(); draw(); });
+
+  var lb = document.querySelectorAll(".lang button");
+  for (var j = 0; j < lb.length; j++){
+    lb[j].addEventListener("click", function(){
+      lang = this.getAttribute("data-lang");
+      try { localStorage.setItem("bb-lang", lang); } catch (e) {}
+      applyLang(); chips(); dataTable(); days(); draw();
+    });
+  }
+
+  applyLang();
+  resetSliders();
+  chips();
+  dataTable();
+  days();
+  draw();
+})();
+</script>
