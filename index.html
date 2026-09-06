@@ -660,7 +660,14 @@
   function hToGoal(t){ return 1000 * Math.log(Math.max(GMIN, Math.min(GMAX, t)) / GMIN) / Math.log(GMAX / GMIN); }
 
   var lang = "en", cur = R[0], dough = 888, hyd = 60, ino = 12.8, temp = 5, warm = 3, mode = "fwd", goalH = 29;
-  try { var ls = localStorage.getItem("bb-lang"); if (ls === "de" || ls === "en") lang = ls; } catch (e) {}
+  // 1. an explicit choice made on this device wins, 2. otherwise follow the browser, 3. otherwise English
+  (function(){
+    var saved = null;
+    try { saved = localStorage.getItem("bb-lang"); } catch (e) {}
+    if (saved === "de" || saved === "en"){ lang = saved; return; }
+    var pref = (navigator.languages && navigator.languages.length ? navigator.languages[0] : navigator.language) || "";
+    if (pref.toLowerCase().indexOf("de") === 0) lang = "de";
+  })();
 
   function L(o){ return lang === "de" ? o.de : o.en; }
   function num(n, d){ return n.toLocaleString(lang === "de" ? "de-CH" : "en-GB", {minimumFractionDigits:d||0, maximumFractionDigits:d||0}); }
