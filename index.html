@@ -662,6 +662,40 @@
     return { lo: lo, hi: hi };
   }
 
+  // ---- analytics: fires only where a gtag snippet exists (the hosted build) ----
+  function track(name, params){
+    if (typeof window.gtag !== "function") return;
+    try { window.gtag("event", name, params || {}); } catch (e) {}
+  }
+  // continuous slider values are bucketed, otherwise every reading is its own
+  // dimension value and "most popular configuration" is unanswerable
+  function bucket(v, step){ return Math.round(v / step) * step; }
+  function configLabel(){
+    return cur.id + "|h" + bucket(hyd, 5) + "|i" + bucket(ino, 2) +
+           "|w" + bucket(warm, 1) + "|t" + bucket(temp, 1) + "|" + mode;
+  }
+  var settleTimer = null, lastSent = "", lastSlider = "";
+  function trackConfig(which){
+    lastSlider = which || lastSlider;
+    if (settleTimer) clearTimeout(settleTimer);
+    settleTimer = setTimeout(function(){
+      var label = configLabel();
+      if (label === lastSent) return;   // do not re-send an unchanged state
+      lastSent = label;
+      track("config_explore", {
+        config: label,
+        recipe: cur.id,
+        changed: lastSlider,
+        mode: mode,
+        hydration_pct: bucket(hyd, 5),
+        inoculation_pct: bucket(ino, 2),
+        dough_g: bucket(dough, 100),
+        warm_h: bucket(warm, 1),
+        fridge_c: bucket(temp, 1)
+      });
+    }, 1400);   // fire once the reader stops dragging, not on every pixel
+  }
+
   var GMIN = 2, GMAX = 120;
   function goalToH(v){ return GMIN * Math.pow(GMAX / GMIN, v / 1000); }
   function hToGoal(t){ return 1000 * Math.log(Math.max(GMIN, Math.min(GMAX, t)) / GMIN) / Math.log(GMAX / GMIN); }
@@ -715,7 +749,11 @@
       b.type = "button"; b.className = "chip";
       b.setAttribute("aria-pressed", r === cur ? "true" : "false");
       b.innerHTML = (r.st === "rye" ? '<span class="dot">◆ </span>' : "") + L(r);
-      b.addEventListener("click", function(){ cur = r; resetSliders(); draw(); });
+      b.addEventListener("click", function(){
+        cur = r; resetSliders(); draw();
+        track("recipe_select", {recipe: r.id, recipe_name: r.en});
+        lastSent = "";
+      });
       box.appendChild(b);
     });
   }
@@ -1119,16 +1157,16 @@
     document.documentElement.setAttribute("lang", lang);
   }
 
-  function bind(id, fn){
+  function bind(id, fn, label){
     var e = document.getElementById(id);
-    e.addEventListener("input", function(){ fn(parseFloat(e.value)); draw(); });
+    e.addEventListener("input", function(){ fn(parseFloat(e.value)); draw(); trackConfig(label); });
   }
-  bind("s-dough", function(v){ dough = v; });
-  bind("s-hyd",   function(v){ hyd = v; });
-  bind("s-ino",   function(v){ ino = v; });
-  bind("s-temp",  function(v){ temp = v; });
-  bind("s-warm",  function(v){ warm = v; });
-  bind("s-goal",  function(v){ goalH = goalToH(v); });
+  bind("s-dough", function(v){ dough = v; }, "dough");
+  bind("s-hyd",   function(v){ hyd = v; }, "hydration");
+  bind("s-ino",   function(v){ ino = v; }, "inoculation");
+  bind("s-temp",  function(v){ temp = v; }, "fridge_temp");
+  bind("s-warm",  function(v){ warm = v; }, "warm_phase");
+  bind("s-goal",  function(v){ goalH = goalToH(v); }, "target_time");
 
   var mb = document.querySelectorAll(".modes button");
   for (var m = 0; m < mb.length; m++){
@@ -1143,9 +1181,18 @@
         document.getElementById("s-goal").value = hToGoal(goalH);
       }
       draw();
+      track("mode_switch", {mode: mode, recipe: cur.id});
     });
   }
-  document.getElementById("reset").addEventListener("click", function(){ resetSliders(); draw(); });
+  document.getElementById("reset").addEventListener("click", function(){
+    resetSliders(); draw(); lastSent = "";
+    track("reset_formula", {recipe: cur.id});
+  });
+  (function(){
+    var g = document.querySelector("details.guide");
+    if (g) g.addEventListener("toggle", function(){ if (g.open) track("starter_guide_open", {}); });
+    window.addEventListener("beforeprint", function(){ track("print_page", {recipe: cur.id, config: configLabel()}); });
+  })();
 
   var lb = document.querySelectorAll(".lang button");
   for (var j = 0; j < lb.length; j++){
@@ -1153,6 +1200,7 @@
       lang = this.getAttribute("data-lang");
       try { localStorage.setItem("bb-lang", lang); } catch (e) {}
       applyLang(); chips(); dataTable(); days(); draw();
+      track("language_switch", {lang: lang});
     });
   }
 
