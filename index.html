@@ -3,18 +3,46 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Nando's Bread Book</title>
-<meta name="description" content="Five sourdough formulas in baker's percentages, with a fermentation model fitted live from the bakes themselves — and quoted as a range, because that is all the data supports.">
+<title>Sourdough Calculator &amp; Fermentation Model · Nando's Bread Book</title>
+<meta name="description" content="Sourdough calculator in baker's percentages. Five formulas, from spelt pizza to rye, and a fermentation model that turns starter % into fridge time.">
 <meta name="author" content="Nando Metzger">
+<link rel="canonical" href="https://nandometzger.github.io/bread/">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#E8E4D8" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#131520" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%227%22%20fill%3D%22%23171A2B%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2210.5%22%20fill%3D%22%23C0762B%22%2F%3E%3Cg%20stroke%3D%22%23171A2B%22%20stroke-width%3D%222.4%22%20stroke-linecap%3D%22round%22%3E%3Cline%20x1%3D%2210%22%20y1%3D%2219.5%22%20x2%3D%2215%22%20y2%3D%2211.5%22%2F%3E%3Cline%20x1%3D%2214%22%20y1%3D%2221.5%22%20x2%3D%2219%22%20y2%3D%2213.5%22%2F%3E%3Cline%20x1%3D%2218.2%22%20y1%3D%2222.8%22%20x2%3D%2222.6%22%20y2%3D%2215.8%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%227%22%20fill%3D%22%23171A2B%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%2210.5%22%20fill%3D%22%23C0762B%22%2F%3E%3Cg%20stroke%3D%22%23171A2B%22%20stroke-width%3D%222.4%22%20stroke-linecap%3D%22round%22%3E%3Cline%20x1%3D%2210%22%20y1%3D%2219.5%22%20x2%3D%2215%22%20y2%3D%2211.5%22%2F%3E%3Cline%20x1%3D%2214%22%20y1%3D%2221.5%22%20x2%3D%2219%22%20y2%3D%2213.5%22%2F%3E%3Cline%20x1%3D%2218.2%22%20y1%3D%2222.8%22%20x2%3D%2222.6%22%20y2%3D%2215.8%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Nando's Bread Book">
+<meta property="og:site_name" content="Nando's Bread Book">
+<meta property="og:title" content="Sourdough, as a dataset.">
 <meta property="og:description" content="Five sourdough formulas in baker's percentages, with a fermentation model fitted live from the bakes themselves — and quoted as a range, because that is all the data supports.">
-<meta name="twitter:card" content="summary">
+<meta property="og:url" content="https://nandometzger.github.io/bread/">
+<meta property="og:locale" content="en_GB">
+<meta property="og:locale:alternate" content="de_CH">
+<meta property="og:image" content="https://nandometzger.github.io/bread/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Nando's Bread Book: Sourdough, as a dataset. Five formulas, 60–91% hydration, 8.3–22.2% inoculation.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:creator" content="@nandometzger">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Nando's Bread Book",
+  "headline": "Sourdough, as a dataset.",
+  "description": "A sourdough calculator in baker's percentages, with five formulas and a fermentation model that estimates fridge time from starter percentage.",
+  "url": "https://nandometzger.github.io/bread/",
+  "image": "https://nandometzger.github.io/bread/og.png",
+  "inLanguage": ["en", "de"],
+  "about": ["Sourdough", "Baker's percentage", "Fermentation", "Spelt bread", "Rye bread", "Focaccia", "Pizza dough"],
+  "author": {
+    "@type": "Person",
+    "name": "Nando Metzger",
+    "url": "https://nandometzger.github.io/"
+  }
+}
+</script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-5FBRP8LCRB"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
